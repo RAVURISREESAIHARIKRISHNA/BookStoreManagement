@@ -39,7 +39,7 @@ public class Search extends HttpServlet {
 				getDataFromDB += "'"+ iter.next() + "'" + ",";
 			}
 			getDataFromDB = getDataFromDB.substring(0,getDataFromDB.length()-1);
-			getDataFromDB += ")";
+			getDataFromDB += ") AND PRICE >= 1";
 			ResultSet searchBooks = st.executeQuery(getDataFromDB);
 			String html="<!DOCTYPE html>\r\n" + 
 					"<html>\r\n" + 
