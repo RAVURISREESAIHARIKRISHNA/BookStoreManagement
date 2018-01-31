@@ -1,6 +1,7 @@
 package bookstoremanagement;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -33,9 +34,44 @@ public class Search extends HttpServlet {
 				isbns.add(rsisbn.getString("ISBN"));
 			}
 			Iterator<String> iter = isbns.iterator();
+			String getDataFromDB = "SELECT ISBN,BOOK_NAME,AUTHOR,PRICE FROM BOOKS WHERE ISBN in (";
 			while(iter.hasNext()) {
-				System.out.println(iter.next());
+				getDataFromDB += "'"+ iter.next() + "'" + ",";
 			}
+			getDataFromDB = getDataFromDB.substring(0,getDataFromDB.length()-1);
+			getDataFromDB += ")";
+			ResultSet searchBooks = st.executeQuery(getDataFromDB);
+			String html="<!DOCTYPE html>\r\n" + 
+					"<html>\r\n" + 
+					"    <head>\r\n" + 
+					"        <title>Search</title>\r\n" + 
+					"    </head>\r\n" + 
+					"    <body>\r\n" + 
+					"        <center>";
+			while(searchBooks.next()) {
+				html += "<div>\r\n" + 
+						"                <h2>";
+				html += searchBooks.getString("BOOK_NAME");
+				html += "</h2><font size=\"2\">By ";
+				html += searchBooks.getString("AUTHOR");
+				html += "<p></p></font>\r\n" + 
+						"                ";
+				html += "$"+searchBooks.getString("PRICE");
+				html += "\r\n" + 
+						"                <button id=\"";
+				html += searchBooks.getString("ISBN");
+				html += "\" onclick=\"clicked(this.id)\">Buy</button>\r\n" + 
+						"                <hr>\r\n" + 
+						"            </div>";
+				
+			}
+			html +=" </center>\r\n" + 
+					"        <script type=\"text/javascript\" src=\"template.js\"></script>\r\n" + 
+					"    </body>\r\n" + 
+					"</html>";
+			PrintWriter pw = response.getWriter();
+			response.setContentType("text/html");
+			pw.println(html);
 		}catch(ClassNotFoundException e) {
 			System.out.println("Class Not found");
 		}catch(SQLException e) {
