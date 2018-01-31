@@ -1,5 +1,5 @@
 function clicked( bookId){
-    post("http://localhost:8888/ServletServe/Dummy",{isbn:bookId.toString()});
+    post("http://localhost:8888/Book_Store_Management_System/LogInValidate",{isbn:bookId.toString()});
 }
 
 function post(path,params,method){
@@ -18,4 +18,8 @@ function post(path,params,method){
     }
     document.body.appendChild(form);
     form.submit();
+}
+
+function forward(url){
+
 }

@@ -1,0 +1,22 @@
+<!DOCTYPE>
+<html>
+<head>
+<title>login in page</title>
+</head>
+<body style="background:#FFFFCC ">
+	<center>
+		<h1>Sign up page</h1>
+		<p></p>
+		<form action="SignUpManager" onsubmit="return checkPassword()" method="POST">
+		Name<input type="text" placeholder="name" name="name" required><br>
+			Email<input type="text" placeholder="email" name="email" required><br>
+			<br> Password<input type="password" placeholder="password"
+				name="password" id="pass" required><br>
+			<br> Re-TypePassword<input type="password" placeholder="repeat password"
+				name="repeat password" id="retype" required><br>
+			<br>
+			<button type="submit">SignUp</button>
+	</center>
+	</form>
+	<script type="text/javascript" src="validation.js"></script>
+</body>

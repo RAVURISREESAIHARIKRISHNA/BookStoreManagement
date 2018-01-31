@@ -46,7 +46,7 @@ public class Search extends HttpServlet {
 					"    <head>\r\n" + 
 					"        <title>Search</title>\r\n" + 
 					"    </head>\r\n" + 
-					"    <body>\r\n" + 
+					"    <body style=\"background:#FFFFCC \" >\r\n" + 
 					"        <center>";
 			while(searchBooks.next()) {
 				html += "<div>\r\n" + 
