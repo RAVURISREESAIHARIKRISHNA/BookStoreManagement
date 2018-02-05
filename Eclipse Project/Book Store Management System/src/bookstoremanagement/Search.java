@@ -21,7 +21,7 @@ public class Search extends HttpServlet {
 	
 	@Override
 	public void doGet(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException{
-		String query = request.getParameter("query");
+		String query = request.getParameter("query").toUpperCase();
 		try {
 			Class.forName("oracle.jdbc.OracleDriver");
 			Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "store", "store");
